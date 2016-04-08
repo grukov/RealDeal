@@ -1,0 +1,102 @@
+﻿@model MvcTemplate.Web.ViewModels.RealEstate.RealEstateAddViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add Real Estate</h2>
+<div class="row">
+    @using (Html.BeginForm("AddRealEstate", "RealEstate", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-7">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                        @*<div id="add-images-btn" class="btn btn-default">Add Images</div>*@
+                    <span><b>Add Images:</b></span>
+                    </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Hood, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Hood, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Hood, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EstateType, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(m => m.EstateType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.EstateType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LettingType, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(m => m.LettingType, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LettingType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FurnishedState, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.EnumDropDownListFor(m => m.FurnishedState, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FurnishedState, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Size, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Size, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Size, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+                <div class="col-md-7">
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @*<div id="image-container" class="col-lg-5">
+
+            </div>*@
+        <input type="file" name="images" multiple="multiple" class="btn btn-default"/>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+            </div>
+        </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Add Real Estate" class="btn btn-default" />
+                    </div>
+                </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/addImages")
+}

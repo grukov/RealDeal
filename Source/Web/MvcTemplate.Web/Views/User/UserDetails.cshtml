@@ -1,0 +1,28 @@
+﻿@model MvcTemplate.Data.Models.User
+@{
+    ViewBag.Title = "UserDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container text-center">
+    <h2>User Details</h2>
+</div>
+<div class="container">
+    <table class="table-responsive table table-bordered">
+        <tr>
+            <td class="text-center">Email: </td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td class="text-center">First Name: </td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td class="text-center">Last Name: </td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td class="text-center"><a href="/RealEstate/UserRealEstates/@Model.Id">Real Estates: </a></td>
+            <td>@Model.RealEstates.Count</td>
+        </tr>
+    </table>
+</div>

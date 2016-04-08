@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="container">
+    <div class="row">
+        <img src="http://therealdeal.com/wp-content/uploads/2011/12/tumblr_static_jmi1xc6d0oow4kw4gkc0ss0k.png" />
+    </div>
+    <div class="col-md-10">
+        <table>
+
+            @foreach (var item in ViewBag.FBFeed)
+            {
+                <tr>
+                    <td>
+                        <b>@item.Title</b><a id="more-rrs-feeds" href="@item.Link" target="_blank"> Read More </a> on @Convert.ToDateTime(item.PubDate)
+                        <br />
+                        @Html.Raw(item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

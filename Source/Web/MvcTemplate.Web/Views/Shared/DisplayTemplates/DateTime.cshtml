@@ -1,0 +1,10 @@
+﻿@model DateTime?
+
+@if (Model.HasValue)
+{
+    <span>@Model.Value.ToString(" MM / dd / yyyy")</span>
+}
+else
+{
+    <span>No date entered!</span>
+}

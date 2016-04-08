@@ -1,0 +1,38 @@
+﻿<div class="container text-center"><h2>Comments</h2></div>
+<hr />
+<div class="row">
+    @(Html.Kendo().Grid<MvcTemplate.Data.Models.Comment>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id);
+          columns.Bound(c => c.Content);
+          columns.Bound(c => c.CreatedOn).Format("{0:dd/MM/yyyy}");
+          columns.Bound(c => c.ModifiedOn).Format("{0:dd/MM/yyyy}");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable(scr => scr.Height(230))
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(6)
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(p => p.Id).Editable(false);
+              model.Field(p => p.CreatedOn).Editable(false);
+              model.Field(p => p.ModifiedOn).Editable(false);
+          })
+          .Read(read => read.Action("Comments_Read", "Comments"))
+          .Update(update => update.Action("Comments_Update", "Comments"))
+          .Destroy(destroy => destroy.Action("Comments_Destroy", "Comments"))
+      )
+    )
+</div>

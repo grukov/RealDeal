@@ -1,0 +1,47 @@
+﻿@model MvcTemplate.Web.ViewModels.User.UserGalleryViewModel
+
+@{
+    ViewBag.Title = "UserGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">User Gallery</h2>
+<br />
+<div class="col-md-1"><span id="add-photo-btn" class="btn btn-default">Add Photo</span></div>
+<div class="col-md-4">
+    
+    @using (Html.BeginForm("AddUserImage", "UserImage", FormMethod.Post, new { id = "add-photo-form", display = "none", @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+    {
+        <span class="inline"><input type="file" name="photo" class="btn btn-default inline"/></span>
+        <span class="inline"><input class="btn btn-default" type="submit" value="Add" /></span>
+    }
+</div>
+<br />
+<hr />
+<div class="container">
+    @foreach (var photo in Model.Photos)
+    {
+        <div class="col-md-3 text-center" style="margin-bottom:25px">
+            <img src="@Url.Action("GetUserImage", "UserImage", new { id = photo.Id }) " class="img img-responsive avatar text-center", style="margin-left:25px" />
+            <br />
+            @Html.ActionLink("Make Profile Picture", "MakeProfilePicture", "UserImage", new { id = photo.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Remove", "RemoveUserImage", "UserImage", new { id = photo.Id }, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+<script>
+    var formIsHide = true
+    
+    $('#add-photo-btn').click(function (data) {
+        if (formIsHide) {
+            $('#add-photo-form').show();
+            formIsHide = false;
+        }
+        else {
+            $('#add-photo-form').hide();
+            formIsHide = true;
+        }
+        
+    })
+</script>

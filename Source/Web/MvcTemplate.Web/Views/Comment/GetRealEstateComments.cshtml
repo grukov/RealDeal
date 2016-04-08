@@ -1,0 +1,19 @@
+﻿@model ICollection<MvcTemplate.Web.ViewModels.Comment.CommentPagingViewModel>
+
+@foreach (var comment in Model)
+{
+    <div class="row">
+        <div class="col-md-2">
+            <span><a href="#/@comment.User.Id"><b>@comment.User.Email: </b></a></span>
+            <span><b>@comment.CreatedOn</b></span>
+        </div>
+        <div class="col-md-9">
+            <span>
+                <p class="text-justify"> 
+                    @comment.Content
+                </p>
+            </span>
+        </div>
+    </div>
+    <hr />
+}

@@ -1,0 +1,50 @@
+﻿@model List<MvcTemplate.Web.ViewModels.RealEstate.RealEstateViewModel>
+@if (TempData["Category"] != null)
+{
+<div class="container text-center">
+    <h2>@TempData["Category"]</h2>
+</div>
+<hr />
+}
+<div class="row">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+    <div class="col-md-5 realestate-tab-content">
+        <div class="card hovercard border">
+            <div>
+                <h3 class="inline"><a href="/RealEstate/RealEstateDetails/@Model[i].Id">
+                    <b>@Model[i].Title</b></a></h3>
+                <span>by <h4 class="inline">@Model[i].User.Email</h4></span>
+                <span class="pull-right"><b>@Model[i].Likes Likes</b></span>
+            </div>
+            <div class="avatar">
+                <span class="pull-right"><b>@Model[i].Comments Comments</b></span>
+            </div>
+
+            <div class="info">
+                <ul id="realestate-details">
+                    <li>
+                        @Model[i].City , @Model[i].Hood
+                    </li>
+                    <li>
+                        @Model[i].LettingType
+                    </li>
+                    <li>
+                        @Model[i].Size cm2
+                    </li>
+                    <li>
+                        € @Model[i].Price
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+        if (i % 2 != 0)
+        {
+            <div class="col-md-10">
+                <br />
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,59 @@
+﻿@model MvcTemplate.Web.ViewModels.User.UserManagerChangeViewModel
+@{
+    ViewBag.Title = "UserManager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container text-center">
+    @*<h2>User Manager</h2>*@
+</div>
+<br />
+<div class="container">
+    <div class="col-md-6">
+        <div class="pull-right text-center">
+            <h1>@Model.Email</h1>
+            <br />
+            <div>
+                <h3>@Html.ActionLink("To The Gallery ...", "UserGallery", "User" , new { id = Model.Id }, new { @class = "btn btn-default" })</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @if (Model.HasProfilePicture())
+        {
+            <img src="@Url.Action("GetProfilePicture", "UserImage", new { id = Model.Id }) "class="img img-responsive avatar" />
+        }
+        else
+        {
+            <img src="http://www.hsyearbook.org/static/images/unknown_user_large.png" class="img img-responsive avatar" />
+        }
+    </div>
+</div>
+<br />
+<div class="container">
+        @using (Html.BeginForm("EditUser", "User", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+        { 
+        <table class="table table-responsive">
+            <tr>
+                <td>Email: </td>
+                <td>@Html.EditorFor(m => Model.Email)</td>
+            </tr>
+            <tr>
+                <td>First mame: </td>
+                <td>@Html.EditorFor(m => Model.FirstName)</td>
+            </tr>
+            <tr>
+                <td>Last name: </td>
+                <td>@Html.EditorFor(m => Model.LastName)</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>@Html.ActionLink("Change your password", "ChangePassword", "Manage")</td>
+            </tr>
+            <tr>
+                <td>Avatar: </td>
+                <td><input type="file" name="avatar"/></td>
+            </tr>
+        </table>
+        <input class="btn btn-default" type="submit" value="Change Profile" />
+        }
+</div>

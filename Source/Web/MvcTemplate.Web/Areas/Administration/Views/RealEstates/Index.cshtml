@@ -1,0 +1,47 @@
+﻿<div class="container text-center"><h2>Real Estates</h2></div>
+<hr />
+<div class="row">
+    @(Html.Kendo().Grid<MvcTemplate.Data.Models.RealEstate>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id);
+          columns.Bound(c => c.Title);
+          columns.Bound(c => c.Size);
+          columns.Bound(c => c.Price);
+          columns.Bound(c => c.City);
+          columns.Bound(c => c.Hood);
+          columns.Bound(c => c.EstateType);
+          columns.Bound(c => c.LettingType);
+          columns.Bound(c => c.FurnishedState);
+          columns.Bound(c => c.CreatedOn).Format("{0:dd/MM/yyyy}");
+          columns.Bound(c => c.ModifiedOn).Format("{0:dd/MM/yyyy}");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Navigatable()
+      .Scrollable(scr => scr.Height(230))
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.SingleColumn);
+      })
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(p => p.Id).Editable(false);
+              model.Field(p => p.CreatedOn).Editable(false);
+              model.Field(p => p.ModifiedOn).Editable(false);
+          })
+          .Read(read => read.Action("RealEstates_Read", "RealEstates"))
+          .Update(update => update.Action("RealEstates_Update", "RealEstates"))
+          .Destroy(destroy => destroy.Action("RealEstates_Destroy", "RealEstates"))
+      )
+    )
+</div>
